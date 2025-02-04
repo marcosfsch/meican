@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 LABEL Description="MEICAN Image" \
       Author="Leonardo Lauryel Batista dos Santos"
@@ -21,13 +21,13 @@ RUN apt-get update \
     unzip \
     # Install apache
     apache2 \
-    # Install php 7.0
-    php7.0 \
-    php7.0-mysql \
-    php7.0-mbstring \
-    php7.0-curl \
-    php7.0-soap \
-    php7.0-xml \
+    # Install php 7.4
+    php7.4 \
+    php7.4-mysql \
+    php7.4-mbstring \
+    php7.4-curl \
+    php7.4-soap \
+    php7.4-xml \
     libapache2-mod-php \
  && rm -rf /var/lib/apt/lists/*
 
@@ -37,7 +37,7 @@ RUN adduser --disabled-password --gecos '' meican \
 
 WORKDIR $MEICAN_DIR
 
-RUN su meican -c "curl -kO https://getcomposer.org/download/1.9.3/composer.phar" \
+RUN su meican -c "curl -kO https://getcomposer.org/download/1.10.27/composer.phar" \
  && su meican -c "php composer.phar global require "fxp/composer-asset-plugin:~1.4.4"" \
  && ln -s $MEICAN_DIR/web /var/www/meican \
  && a2enmod rewrite
